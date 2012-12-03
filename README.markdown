@@ -34,6 +34,15 @@ Examples:
   %% disconnect from the odbc data source
   poolboy_odbc:disconnect('odbc/pool1', Worker),
   
+  %% If you don't want to connect and disconnect manually,
+  %% just use this construct. Even if an error is raised, the
+  %% connection will be returned to the pool.
+  poolboy_odbc:safe_worker('odbc/pool1', fun(Worker) ->
+    {updated, 1} = poolboy_odbc:param_query(Worker, 
+      "INSERT INTO TEST (name) VALUES (?)",
+      [{{varchar, 64}, [<<"Hans Dampf">>]}])
+  end),
+  
   %% remove the pool
   poolboy_odbc_mgr:remove_pool('odbc/pool1'),
   
