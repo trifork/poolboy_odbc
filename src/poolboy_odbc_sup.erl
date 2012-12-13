@@ -12,9 +12,11 @@
 %% the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 -module(poolboy_odbc_sup).
--author("men").
+-author('Matthias Endler <matthias.endler@pantech.at>').
 
 -behaviour(supervisor).
+
+-define(CHILD_SPEC(Name, Type), {Name, {Name, start_link, []}, permanent, 5000, Type, [Name]}).
 
 %% API
 -export([start_link/0]).
@@ -28,6 +30,6 @@ start_link() ->
 
 %% supervisor callbacks
 init([]) ->
-  MgrSpec = {poolboy_odbc_mgr, {poolboy_odbc_mgr, start_link, []}, permanent, 5000, worker, [poolboy_odbc_mgr]},
-  WorkerSupSpec = {poolboy_odbc_worker_sup, {poolboy_odbc_worker_sup, start_link, []}, permanent, 5000, supervisor, [poolboy_odbc_worker_sup]},
-  {ok, {{one_for_one, 5, 10}, [MgrSpec, WorkerSupSpec]}}.
+  Children = [{poolboy_odbc_mgr, worker}, {poolboy_odbc_worker_sup, supervisor}],
+  ChildSpecs = [?CHILD_SPEC(Name, Type) || {Name, Type} <- Children],
+  {ok, {{one_for_one, 5, 10}, ChildSpecs}}.

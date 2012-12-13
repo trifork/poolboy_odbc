@@ -12,7 +12,7 @@
 %% the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 -module(poolboy_odbc_app).
--author("Matthias Endler <matthias.endler@pantech.at>").
+-author('Matthias Endler <matthias.endler@pantech.at>').
 
 -behaviour(application).
 
