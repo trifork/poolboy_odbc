@@ -14,7 +14,7 @@
 {application, poolboy_odbc, [
   {description, "Pooled ODBC for Erlang"},
   {vsn, "0.1.0"},
-  {applications, [kernel, stdlib]},
+  {applications, [kernel, stdlib, odbc]},
   {registered, []},
   {mod, {poolboy_odbc_app, []}}
 ]}.

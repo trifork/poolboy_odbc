@@ -105,6 +105,9 @@ start() ->
   start(temporary).
 
 start(Type) ->
+  application:load(?MODULE),
+  {ok, Apps} = application:get_key(?MODULE, applications),
+  [ensure_started(App) || App <- Apps],
   application:start(?MODULE, Type).
 
 stop() ->
@@ -127,3 +130,13 @@ select(Worker, Position, N) ->
 
 select(Worker, Position, N, TimeOut) ->
   gen_server:call(Worker, {select, Position, N, TimeOut}).
+
+%% private functions
+
+ensure_started(App) ->
+  case application:start(App) of
+    ok ->
+      ok;
+    {error, {already_started, App}} ->
+      ok
+  end.

@@ -8,7 +8,7 @@ Usage:
 ------
 
 ```erl-sh
-1> application:start(poolboy_odbc).
+1> poolboy_odbc:start().
 ok
 2> poolboy_odbc_mgr:add_pool('odbc/pool1', [{size, 5}, {max_overflow, 10}],
     [{dsn, "DSN=pool1;UID=user;PWD=secret"}, {options, [
@@ -17,6 +17,9 @@ ok
 ok
 3> Worker = poolboy_odbc:connect('odbc/pool1').
 <0.31.0>
+4> poolboy_odbc:sql_query(Worker, "SELECT * FROM test").
+{selected, ["id", "name"],
+           [{1, <<"Erika Mustermann">>}]}
 ```
 
 You can now do all operations like in the odbc module, except you use the poolboy_odbc module and the Worker instead of
