@@ -37,7 +37,7 @@ To reduce boilerplate code for connecting and safe disconnecting, you can use po
          {updated, 1} = poolboy_odbc:param_query(SafeWorker,
            "INSERT INTO TEST (name) VALUES (?)",
            [{{varchar, 64}, [<<"Hans Dampf">>]}])
-       end)
+       end).
 {updated, 1}
 101>
 ```
