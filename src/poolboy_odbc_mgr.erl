@@ -27,9 +27,24 @@
 
 -define(SERVER, ?MODULE).
 
+-type odbc_option() :: {auto_commit, on | off} | {timeout, timeout()} | {binary_strings, on | off} | {tuple_row, on | off} |
+    {scrollable_cursors, on | off} | {trace_driver, on | off}.
+
+-type odbc_options() :: [odbc_option()].
+
+-type pool_arg() :: {dsn, string()} | {options, odbc_options()}.
+
+-type pool_args() :: [pool_arg()].
+
+-type size_arg() :: {size, pos_integer()} | {max_overflow, pos_integer()}.
+
+-type size_args() :: [size_arg()].
+
+-spec add_pool(Name::atom(), SizeArgs::size_args(), PoolArgs::odbc_options()) -> {ok, pid()} | {error, term()}.
 add_pool(Name, SizeArgs, PoolArgs) ->
   gen_server:call(?SERVER, {add_pool, {Name, SizeArgs, PoolArgs}}).
 
+-spec remove_pool(Name::atom()) -> ok.
 remove_pool(Name) ->
   gen_server:call(?SERVER, {remove_pool, Name}).
 
