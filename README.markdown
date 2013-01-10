@@ -45,7 +45,7 @@ To reduce boilerplate code for connecting and safe disconnecting, you can use po
 Authors:
 --------
 
-- Matthias Endler (matthias-endler) <matthias.endler@pantech.at>
+- Matthias Endler ([matthias-endler](https://github.com/matthias-endler)) <matthias.endler@pantech.at>
 
 License:
 --------
