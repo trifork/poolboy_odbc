@@ -50,4 +50,4 @@ Authors:
 License:
 --------
 
-poolboy_odbc is availabe under the LGPL version 3.0.
+poolboy_odbc is licensed under the MIT license from version 0.2.1 on, any version before that was licensed under the LGPL 3.0.
