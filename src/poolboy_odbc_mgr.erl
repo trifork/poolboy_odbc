@@ -49,7 +49,7 @@
 
 -type size_args() :: [size_arg()].
 
--spec add_pool(Name::atom(), SizeArgs::size_args(), PoolArgs::odbc_options()) -> {ok, pid()} | {error, term()}.
+-spec add_pool(Name::atom(), SizeArgs::size_args(), PoolArgs::pool_args()) -> {ok, pid()} | {error, term()}.
 add_pool(Name, SizeArgs, PoolArgs) ->
   gen_server:call(?SERVER, {add_pool, {Name, SizeArgs, PoolArgs}}).
 
