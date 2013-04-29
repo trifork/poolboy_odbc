@@ -207,7 +207,7 @@ sql_query(Worker, SQLQuery, TimeOut) ->
 select_count(Worker, SelectQuery) ->
   select_count(Worker, SelectQuery, ?TIMEOUT).
 
--spec select_count(Worker::pid(), SelectQuery::string(), TimeOut::timeout) -> {ok, n_rows()} | {error, common_reason()}.
+-spec select_count(Worker::pid(), SelectQuery::string(), TimeOut::timeout()) -> {ok, n_rows()} | {error, common_reason()}.
 select_count(Worker, SelectQuery, TimeOut) ->
   gen_server:call(Worker, {select_count, SelectQuery, TimeOut}).
 
