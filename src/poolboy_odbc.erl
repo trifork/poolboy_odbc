@@ -85,17 +85,17 @@
 
 -type value() :: null | term().
 
--type worker_fun() :: fun((Worker::pid()) -> any()).
+-type worker_fun(T) :: fun((Worker::pid()) -> T).
 
--spec safe_worker(Pool::atom(), Fun::worker_fun()) -> ok.
+-spec safe_worker(Pool::atom(), Fun::worker_fun(T)) -> {ok,T}.
 safe_worker(Pool, Fun) ->
   safe_worker(Pool, Fun, true).
 
--spec safe_worker(Pool::atom(), Fun::worker_fun(), Block::boolean()) -> ok | full.
+-spec safe_worker(Pool::atom(), Fun::worker_fun(T), Block::boolean()) -> {ok,T} | full.
 safe_worker(Pool, Fun, Block) ->
   safe_worker(Pool, Fun, Block, ?TIMEOUT).
 
--spec safe_worker(Pool::atom(), Fun::worker_fun(), Block::boolean(), TimeOut::timeout()) -> ok | full.
+-spec safe_worker(Pool::atom(), Fun::worker_fun(T), Block::boolean(), TimeOut::timeout()) -> {ok,T} | full.
 safe_worker(Pool, Fun, Block, TimeOut) ->
   case connect(Pool, Block, TimeOut) of
     full ->
@@ -105,8 +105,7 @@ safe_worker(Pool, Fun, Block, TimeOut) ->
         Fun(Worker)
       after
         ok = disconnect(Pool, Worker)
-      end,
-      ok
+      end
   end.
 
 -spec commit(Worker::pid(), CommitMode::commit_mode()) -> ok | {error, commit_reason()}.
