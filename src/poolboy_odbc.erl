@@ -102,7 +102,7 @@ safe_worker(Pool, Fun, Block, TimeOut) ->
       full;
     Worker ->
       try
-        Fun(Worker)
+        {ok, Fun(Worker)}
       after
         ok = disconnect(Pool, Worker)
       end
