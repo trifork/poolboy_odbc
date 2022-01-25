@@ -114,7 +114,7 @@ commit(Worker, CommitMode) ->
 
 -spec commit(Worker::pid(), CommitMode::commit_mode(), TimeOut::timeout()) -> ok | {error, commit_reason()}.
 commit(Worker, CommitMode, TimeOut) ->
-  gen_server:call(Worker, {commit, CommitMode, TimeOut}).
+  gen_server:call(Worker, {commit, CommitMode, TimeOut}, TimeOut).
 
 -spec connect(Pool::atom()) -> pid().
 connect(Pool) ->
@@ -138,7 +138,7 @@ describe_table(Worker, Table) ->
 
 -spec describe_table(Worker::pid(), Table::string(), TimeOut::timeout()) -> {ok, [{col_name(), odbc_data_type()}]} | {error, common_reason()}.
 describe_table(Worker, Table, TimeOut) ->
-  gen_server:call(Worker, {describe_table, Table, TimeOut}).
+  gen_server:call(Worker, {describe_table, Table, TimeOut}, TimeOut).
 
 -spec first(Worker::pid()) -> {selected, col_names(), rows()} | {error, scroll_reason()}.
 first(Worker) ->
@@ -146,7 +146,7 @@ first(Worker) ->
 
 -spec first(Worker::pid(), TimeOut::timeout()) -> {selected, col_names(), rows()} | {error, scroll_reason()}.
 first(Worker, TimeOut) ->
-  gen_server:call(Worker, {first, TimeOut}).
+  gen_server:call(Worker, {first, TimeOut}, TimeOut).
 
 -spec last(Worker::pid()) -> {selected, col_names(), rows()} | {error, scroll_reason()}.
 last(Worker) ->
@@ -154,7 +154,7 @@ last(Worker) ->
 
 -spec last(Worker::pid(), TimeOut::timeout()) -> {selected, col_names(), rows()} | {error, scroll_reason()}.
 last(Worker, TimeOut) ->
-  gen_server:call(Worker, {last, TimeOut}).
+  gen_server:call(Worker, {last, TimeOut}, TimeOut).
 
 -spec next(Worker::pid()) -> {selected, col_names(), rows()} | {error, result_reason()}.
 next(Worker) ->
@@ -162,7 +162,7 @@ next(Worker) ->
 
 -spec next(Worker::pid(), TimeOut::timeout()) -> {selected, col_names(), rows()} | {error, result_reason()}.
 next(Worker, TimeOut) ->
-  gen_server:call(Worker, {next, TimeOut}).
+  gen_server:call(Worker, {next, TimeOut}, TimeOut).
 
 -spec param_query(Worker::pid(), SQLQuery::string(), Params::params()) ->  result_tuple() | {error, common_reason()}.
 param_query(Worker, SQLQuery, Params) ->
@@ -170,7 +170,7 @@ param_query(Worker, SQLQuery, Params) ->
 
 -spec param_query(Worker::pid(), SQLQuery::string(), Params::params(), TimeOut::timeout()) ->  result_tuple() | {error, common_reason()}.
 param_query(Worker, SQLQuery, Params, TimeOut) ->
-  gen_server:call(Worker, {param_query, SQLQuery, Params, TimeOut}).
+  gen_server:call(Worker, {param_query, SQLQuery, Params, TimeOut}, TimeOut).
 
 -spec prev(Worker::pid()) -> {selected, ColNames::[string()], Rows::[any()]} | {error, scroll_reason()}.
 prev(Worker) ->
@@ -178,7 +178,7 @@ prev(Worker) ->
 
 -spec prev(Worker::pid(), TimeOut::timeout()) -> {selected, col_names(), rows()} | {error, scroll_reason()}.
 prev(Worker, TimeOut) ->
-  gen_server:call(Worker, {prev, TimeOut}).
+  gen_server:call(Worker, {prev, TimeOut}, TimeOut).
 
 -spec start() -> ok.
 start() ->
@@ -201,7 +201,7 @@ sql_query(Worker, SQLQuery) ->
 
 -spec sql_query(Worker::pid(), SQLQuery::string(), TimeOut::timeout()) -> result_tuple() | [result_tuple()] | {error, common_reason()}.
 sql_query(Worker, SQLQuery, TimeOut) ->
-  gen_server:call(Worker, {sql_query, SQLQuery, TimeOut}).
+  gen_server:call(Worker, {sql_query, SQLQuery, TimeOut}, TimeOut).
 
 -spec select_count(Worker::pid(), SelectQuery::string()) -> {ok, n_rows()} | {error, common_reason()}.
 select_count(Worker, SelectQuery) ->
@@ -209,7 +209,7 @@ select_count(Worker, SelectQuery) ->
 
 -spec select_count(Worker::pid(), SelectQuery::string(), TimeOut::timeout()) -> {ok, n_rows()} | {error, common_reason()}.
 select_count(Worker, SelectQuery, TimeOut) ->
-  gen_server:call(Worker, {select_count, SelectQuery, TimeOut}).
+  gen_server:call(Worker, {select_count, SelectQuery, TimeOut}, TimeOut).
 
 -spec select(Worker::pid(), Position::position(), N::integer()) -> {selected, col_names(), rows()} | {error, scroll_reason()}.
 select(Worker, Position, N) ->
@@ -217,7 +217,7 @@ select(Worker, Position, N) ->
 
 -spec select(Worker::pid(), Position::position(), N::integer(), TimeOut::timeout()) -> {selected, col_names(), rows()} | {error, scroll_reason()}.
 select(Worker, Position, N, TimeOut) ->
-  gen_server:call(Worker, {select, Position, N, TimeOut}).
+  gen_server:call(Worker, {select, Position, N, TimeOut}, TimeOut).
 
 %% private functions
 
